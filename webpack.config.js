@@ -61,8 +61,6 @@ let config = {
 		// ~~~ By default, module resolution path is current folder (./**) and node_modules.
 		// It is also possible to specify full path:
 		new webpack.ProvidePlugin({
-			// $$: ['./shortJS.js', '../shortJS.js'],
-			// $$: './shortJS.js',
 			$$: path.resolve(path.join(__dirname, 'src/js/shortJS.js')),
 			// bulmaCalendar: path.resolve(
 			// 	path.join(__dirname, 'src/js/bulma-calendar.min.js')
