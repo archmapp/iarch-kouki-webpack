@@ -1,8 +1,4 @@
-// import {bulmaCalendar} from '/node_modules/bulma-extensions/dist/js/bulma-extensions.min.js'
-import bulmaCalendar from './bulma-calendar.min.js'
-import * as $$ from './shortJS.js'
-
-// window.bulmaCalendar = bulmaCalendar
+// import bulmaCalendar from './bulma-calendar.min.js'
 
 let d1, d2, days, v
 // Initialize all input of date type.
@@ -16,14 +12,9 @@ let options = {
 
 const datePickers = bulmaCalendar.attach('[type="date"]', options)
 
-// Loop on each calendar initialized
 datePickers.forEach((calendar) => {
-	// Add listener to select event
 	calendar.on('select', (date) => {
-		// console.log(date)
 		// console.log(date.data.datePicker._date)
-		// console.log(date.data.datePicker._date.start)
-		// console.log(date.data.datePicker._date.end)
 		const d = date.data.datePicker._date
 		d1 = d.start
 		d2 = d.end
@@ -42,6 +33,6 @@ datePickers.forEach((calendar) => {
 
 		$$.q(
 			'#cp'
-		).innerText = `* 工期（${v}）ヶ月は、'クリップボード'にコピーされました。`
+		).innerText = `*　工期（${v}）ヶ月は、'クリップボード'にコピーされました。`
 	})
 })

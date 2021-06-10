@@ -24,7 +24,7 @@ let config = {
 		// 	server._watch('./src/sub/**/*.html')
 		// },
 		// contentBase: 'docs',
-		contentBase: path.join(__dirname, 'dist'),
+		contentBase: path.join(__dirname, 'docs'),
 		open: true,
 		hot: true,
 		writeToDisk: true,
@@ -58,9 +58,16 @@ let config = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 		}),
+		// ~~~ By default, module resolution path is current folder (./**) and node_modules.
+		// It is also possible to specify full path:
 		new webpack.ProvidePlugin({
-			$$: './src/js/shortJS.js',
-			bulmaCalendar: './src/js/bulma-calendar.min.js',
+			// $$: ['./shortJS.js', '../shortJS.js'],
+			// $$: './shortJS.js',
+			$$: path.resolve(path.join(__dirname, 'src/js/shortJS.js')),
+			// bulmaCalendar: path.resolve(
+			// 	path.join(__dirname, 'src/js/bulma-calendar.min.js')
+			// ),
+			bulmaCalendar: './bulma-calendar.min.js',
 		}),
 	],
 }
