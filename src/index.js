@@ -3,5 +3,3 @@ import './css/index.css';
 
 // import './js/bulma-calendar.min'
 import './js/kouki'
-
-console.log($$)
