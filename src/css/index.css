@@ -1,0 +1,28 @@
+/* 
+// @import './bulma.css';
+// @import './bulma-calendar.min.css';
+*/
+@import url('./bulma.css');
+@import url('./bulma-calendar.min.css');
+
+body {
+	font-family: 'メイリオ', 'Arial';
+}
+
+.section {
+	max-width: 700px;
+	margin: 30px auto;
+	overflow: auto;
+	min-height: 700px;
+	border: 1px solid steelblue;
+	padding: 30px;
+	border-radius: 5px;
+	line-height: 2rem;
+}
+
+.header {
+	/* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+	margin-bottom: 50px;
+}

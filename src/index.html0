@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>工期の計算 カレンダー Bulma</title>
+		<!-- <link rel="stylesheet" href="css/mystyles.css" /> -->
+
+		<link rel="stylesheet" href="./css/bulma.css" />
+		<link rel="stylesheet" href="./css/bulma-calendar.min.css" />
+		<link rel="stylesheet" href="./css/bulma-tooltip.min.css" />
+		<link rel="stylesheet" href="./css/index.css" />
+
+		<script src="./js/shortBulma$$.js"></script>
+		<!-- <script src="./js/shortJS.js"></script> -->
+	</head>
+
+	<body>
+		<section class="section">
+			<div class="container">
+				<header class="header">
+					<h1 class="title notification has-background-info-light has-text-warning-dark">カレンダーの利用</h1>
+					<h2 class="has-text-centered is-size-5 mb-6">
+						<span
+							class="
+								has-background-primary-light
+								has-tooltip-primary
+								has-tooltip-bottom
+								p-3
+								mt-2
+							"
+							data-tooltip="（ヶ月）　　｜　　　開札日　　＞　竣工日"
+							>&nbsp; 工期の計算 &nbsp;</span
+						>
+					</h2>
+				</header>
+
+				<div class="field has-addons">
+					<p class="control is-expanded">
+						<input
+							id="kouki"
+							type="text"
+							class="input"
+							placeholder="工期（ヶ月）　"
+						/>
+					</p>
+					<p class="control">
+						<span class="">
+							<input
+								type="date"
+								data-is-range="true"
+								data-display-mode=""
+								data-label-from="開札日"
+								data-label-to="竣工日"
+							/>
+						</span>
+					</p>
+				</div>
+				<div id="cp" class="notification is-warning py-2">
+					* 工期は、クリップボードにコピーされます。
+				</div>
+				<p class="mt-6 is-size-5 has-text-weight-medium">
+					日数 - 7：　<span id="days"></span>
+					<span class="has-text-grey">日</span>
+				</p>
+			</div>
+			<div class="box mt-6">
+				<div class="notification has-background-success-light mt-2 py-3">
+					<p class="text-white has-text-centered">
+						この工期は、予定価格から一般工事費を推定、最低制限価格を推定する<br />
+						WEBアプリ<span class="has-text-light has-background-primary-dark px-2 pt-1"> i建築 </span>で利用しています。
+					</p>
+				</div>
+				<div class="level-item">
+					<button
+						type="button"
+						class="button has-text-light has-background-primary-dark is-medium"
+						style="line-height: 2rem; display: inline-block"
+						onclick='window.open("https://safe-peak-55766.herokuapp.com/api")'
+					>
+						i入札（建築編）
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- <script src="./js/bundle.js"></script> -->
+		<script type="text/javascript" src="./js/bulma-calendar.min.js"></script>
+
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function () {
+				// Get all "navbar-burger" elements
+				var $navbarBurgers = Array.prototype.slice.call(
+					document.querySelectorAll('.navbar-burger'),
+					0
+				)
+
+				// Check if there are any navbar burgers
+				if ($navbarBurgers.length > 0) {
+					// Add a click event on each of them
+					$navbarBurgers.forEach(function ($el) {
+						$el.addEventListener('click', function () {
+							// Get the target from the "data-target" attribute
+							var target = $el.dataset.target
+							var $target = document.getElementById(target)
+
+							// Toggle the class on both the "navbar-burger" and the "navbar-menu"
+							$el.classList.toggle('is-active')
+							$target.classList.toggle('is-active')
+						})
+					})
+				}
+
+				// Initialize the Calendar extension
+				let options = {
+					// lang: 'ja-jp',
+					isRange: true,
+					dateFormat: 'YYYY/MM/DD',
+					// startDate: d1,
+					// endDate: d2,
+				}
+				var datePickers = bulmaCalendar.attach('[type="date"]', options)
+				console.log(
+					'🚀 ~ file: Calendar.html ~ line 177 ~ datePickers[0].datePicker',
+					datePickers[0].datePicker
+				)
+				console.log('🚀 datePickers._date', datePickers[0].datePicker._date)
+				// {start: undefined, end: undefined}
+				let d1, d2, days, v
+				datePickers[0].datePicker.on('select', (date) => {
+					console.log(date)
+					console.log(date.data._date)
+					console.log(date.data._date.start)
+					console.log(date.data._date.end)
+					const d = date.data._date
+					d1 = d.start
+					d2 = d.end
+					days = d2 - d1
+					days = Math.round((d2 - d1) / (24 * 60 * 60 * 1000))
+					days = days - 7
+					if (days <= 0) days = 0
+					v = (days / 30).toFixed(1)
+					console.log(v)
+					$$Id('#kouki').value = days === 0 ? '' : v
+					$$Id('#days').innerText = days
+
+					$$Id('#kouki').focus()
+					$$Id('#kouki').select()
+					document.execCommand('copy')
+
+					$$q(
+						'#cp'
+					).innerText = `* 工期（${v}）ヶ月は、'クリップボード'にコピーされました。`
+				})
+			})
+		</script>
+	</body>
+</html>
+
+<!-- 
+	var defaultOptions = {
+    color: 'primary',
+    isRange: false,
+    allowSameDayRange: true,
+    lang: 'en-US',
+    startDate: undefined,
+    endDate: undefined,
+    minDate: null,
+    maxDate: null,
+    disabledDates: [],
+    disabledWeekDays: undefined,
+    highlightedDates: [],
+    weekStart: 0,
+    dateFormat: 'MM/dd/yyyy',
+    navigationMonthFormat: 'MMMM',
+    navigationYearFormat: 'yyyy',
+    enableMonthSwitch: true,
+    enableYearSwitch: true,
+    displayYearsCount: 50,
+};
+ -->
