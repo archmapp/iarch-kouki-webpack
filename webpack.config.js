@@ -57,6 +57,7 @@ let config = {
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
+			favicon: './src/assets/img/faviconBulma.png',
 		}),
 		// ~~~ By default, module resolution path is current folder (./**) and node_modules.
 		// It is also possible to specify full path:
